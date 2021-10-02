@@ -1,0 +1,157 @@
+Go development ideas:
+Everything is in the folder go/src/*project name*
+Everything is a "package" 
+go install puts things in the bin folder so you can require them from elsewhere.
+
+Go basic syntax:
+
+## function
+func main() { }
+
+With args:
+
+func do_this(x int, y int) { }
+
+With return value:
+
+func do_this(x int, y int) int { 
+	return x + y
+}
+
+Can have multiple return values (as tuples): 
+````
+import (
+	"fmt"
+	"errors"
+)
+func do_this(x int, y int) (int, error) {
+	if x < y {
+		return 0, errors.New("jezaus you maniaaac")
+	} 
+	return x + y, nil
+}
+func use_do_this_return_value() int {
+	result, err := do_this(2, 3)
+	if err != nil {
+		return result	
+	}
+}
+`````
+## variable
+var x int
+
+fmt.Println(x)
+\> 0
+(variables do not need an initial value. They start at 0. For strings it's "0")
+
+var x int = 0
+
+simpler way (go has type inference):
+x := 5
+
+## if statements
+
+if x > 0 {
+	// do y
+}
+
+## Arrays
+Fixed length arrays with fixed type.
+a := [5]int{1, 2, 3, 4, 5}
+
+Not useful, eh?
+Well just like lisp builds lists as an abstraction over cons:
+( a . (b . (c . (e. (f . (g. ()))))))
+There exist "slices" in go:
+
+## slices
+Lists. defined like:
+
+a := []int{1, 2, 3, 4, 5}
+
+Append is like Lisp append:
+append(a, 6) = 
+
+## dictionaries (called map)
+defined: map[type]type
+
+my_dict := make(map[string]string)
+
+my_dict["The Bean"] = "chicago"
+my_dict["Big Ben"] = "london"
+my_dict["Broadway"] = "new york"
+
+Retrieve:
+my_dict["Broadway"]
+\> new york
+
+Delete:
+delete(my_dict, "Broadway")
+
+my_dict["The Bean"]
+
+## For loops, the only go loop
+
+for i := 0; i<5; i++ {
+	fmt.Println(i)
+	i++
+}
+
+The fp god weeps at the side effects and destruction.
+
+For loops also work as a while loop:
+for i < 5 {
+	// do x
+}
+
+### Iterate over array
+
+arr := []string("a", "b", "c")
+for i, value := range arr {
+	fmt.Println("index:", index, "value:", value)
+	// Println takes any ammount of arguments and gives them out seperated by a space.
+}
+
+### Structures
+
+````
+type dog struct {
+	name string
+	breed string
+	jesus_lover bool
+}
+func main() {
+	p := dog(name: "Lily", "Dog... I'm not sure which one", false)
+	return p.name
+}
+````
+
+### Pointers
+
+Pointers are a variables name in memory.
+
+A pointer of a variable is acessed by putting an ampersand before the variable name:
+
+i := 7
+fmt.Println(&i)
+
+for a function pointer 
+func inc(x *int) {
+	\*x++
+}
+Needs to be a star for pointers to work.
+
+
+### true false
+true 
+false
+
+## Basic commands:
+
+go run: runs a file
+
+go build: compiles a file
+
+go install: compiles your package to the the go file. 
+
+
