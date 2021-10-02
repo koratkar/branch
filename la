@@ -1,0 +1,28 @@
+import numpy as np
+
+width = 7
+height = 6
+
+blue = "\033[94m O \033[1m"
+green = "\033[92m O \033[1m"
+
+game_board = np.zeros((height, width), dtype = str)
+
+def insert_token(color, slot):
+  crossed = False
+  for i in range(len(game_board)):
+     if game_board[i][slot + 1] == '':
+        game_board[i][slot+1] = color
+        crossed = True
+     elif crossed:
+        return
+     else:
+        1 + 2
+
+def reverse(lst):
+  return [i for i in reversed(lst)]
+
+def print_board():
+  print(reverse(game_board))
+insert_token(blue, 1)
+print(game_board)
